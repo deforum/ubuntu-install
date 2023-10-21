@@ -4,11 +4,17 @@ Follow this guide to setup a system with GPU drivers, CUDA toolkit, NVIDIA cuDNN
 
 ## 1. GPU Drivers
 
-We recommend using drivers from NVIDIA, which may be more reliable than using Additional Drivers App.
+We recommend using drivers from NVIDIA over the Additional Drivers App. You can download the drivers directly from NVIDIA using the link below:
 
-Download drivers from this [link](https://www.nvidia.com/download/driverResults.aspx/211711/en-us/) then reboot your system using `sudo reboot`.
+[Drivers Link](https://www.nvidia.com/download/driverResults.aspx/211711/en-us/)
 
-Verify your GPU driver installation using:
+After downloading the driver, reboot your system using the command:
+
+```bash
+sudo reboot
+```
+
+Verify the GPU driver installation using:
 
 ```bash
 nvidia-smi
@@ -16,9 +22,15 @@ nvidia-smi
 
 ## 2. Cuda Toolkit 12-3 deb (local)
 
-Install the CUDA toolkit system wide from [here](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#), and download it from this [link](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=20.04&target_type=deb_local).
+Install the CUDA toolkit system wide. You can find the installation guide on the NVIDIA website:
 
-Then run the following commands:
+[CUDA Installation Guide](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#)
+
+The toolkit can be downloaded from the following link:
+
+[CUDA Downloads](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=20.04&target_type=deb_local)
+
+After downloading, run the following commands:
 
 ```bash
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
@@ -30,31 +42,38 @@ sudo apt-get update
 sudo apt-get -y install cuda-toolkit-12-3
 ```
 
-After installation, ensure to add cuda paths to profile as shown [here](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#post-installation-actions)
+After installation, remember to add CUDA paths to your profile as shown in the Post-Installation Actions section of the CUDA Installation Guide:
 
 ```bash
 export PATH=/usr/local/cuda-12.2/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-12.2/lib64\
-                         ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-12.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 ```
 
-Reboot the system using `sudo reboot` and verify the install with `nvcc --version`.
+Reboot the system using `sudo reboot` and verify the installation with `nvcc --version`.
 
 ## 3. NVIDIA cuDNN
 
-Download NVIDIA cuDNN from the following links ([link1](https://developer.nvidia.com/cudnn), [link2](https://developer.nvidia.com/rdp/cudnn-download)).
+You need an NVIDIA account to download cuDNN. You can download it from the following links:
 
-Install guide can be found [here](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html). Refer to Debian Local Installation section.
+[NVIDIA cuDNN](https://developer.nvidia.com/cudnn)
+
+[cuDNN Download](https://developer.nvidia.com/rdp/cudnn-download)
+
+And find the Installation Guide here:
+
+[Installation Guide](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html)
+
+Refer to the Debian Local Installation section in the guide.
 
 ## 4. Miniconda
 
-Download Miniconda:
+To install Miniconda, start by downloading it via the command:
 
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ```
 
-... and install it:
+Install it using the command:
 
 ```bash
 bash Miniconda3-latest-Linux-x86_64.sh
@@ -62,9 +81,11 @@ bash Miniconda3-latest-Linux-x86_64.sh
 
 ## 5. Docker
 
-Refer to Docker install guide [here](https://docs.docker.com/engine/install/ubuntu/).
+The Docker install guide can be found in the link below:
 
-Run the following commands to install Docker:
+[Docker Install Guide](https://docs.docker.com/engine/install/ubuntu/)
+
+Install Docker by running the following commands:
 
 ```bash
 sudo apt-get update
@@ -72,7 +93,11 @@ sudo apt-get install ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
-# Add the repository to Apt sources:
+```
+
+Add the Docker repository to the Apt sources and update:
+
+```bash
 echo \
   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
@@ -80,7 +105,7 @@ echo \
 sudo apt-get update
 ```
 
-To finalize the instalation:
+To finalize the installation:
 
 ```bash
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -92,14 +117,16 @@ To verify the installation:
 sudo docker run hello-world
 ```
 
-Do not forget to perform the [post install steps](https://docs.docker.com/engine/install/linux-postinstall/):
+Also, perform the post-install steps as indicated in the link below:
+
+[Docker Post-Install Steps Guide](https://docs.docker.com/engine/install/linux-postinstall/)
 
 ```bash
 sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
 
-Log out or reboot and verify the installation by running:
+Then log out or reboot. Verify the installation by running:
 
 ```bash
 docker run hello-world
@@ -107,9 +134,11 @@ docker run hello-world
 
 ## 6. Installing the NVIDIA Container Toolkit 
 
-Follow the install guide [here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+The NVIDIA Container Toolkit can be installed by following the guide mentioned in the link below:
 
-Run the following commands:
+[NVIDIA Container Toolkit Install Guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+
+First, run the following commands:
 
 ```bash
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
@@ -119,6 +148,8 @@ curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dear
   && \
     sudo apt-get update
 ```
+
+Next, install the toolkit:
 
 ```bash
 sudo apt-get install -y nvidia-container-toolkit
@@ -140,12 +171,7 @@ Verify the installation:
 
 ```bash
 sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
-```
-
-and 
-
-```bash
 docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 ```
 
-You may need to remove  "--runtime=nvidia" option.
+Remember that you might need to remove  "--runtime=nvidia" option.
