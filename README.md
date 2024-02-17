@@ -2,6 +2,11 @@
 
 Follow this guide to setup a system with GPU drivers, CUDA toolkit, NVIDIA cuDNN, Miniconda, Docker and NVIDIA Container Toolkit.
 
+## 0. Install script added
+```bash
+bash install_drivers.sh
+```
+
 ## 1. GPU Drivers
 
 We recommend using drivers from NVIDIA over the Additional Drivers App. You can download the drivers directly from NVIDIA using the link below:
