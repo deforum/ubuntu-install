@@ -76,8 +76,8 @@ sudo apt-get -y install cuda-toolkit-12-3
 After installation, remember to add CUDA paths to your profile as shown in the Post-Installation Actions section of the CUDA Installation Guide:
 
 ```bash
-export PATH=/usr/local/cuda-12.2/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-12.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PATH=/usr/local/cuda-12.3/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 ```
 
 Reboot the system using `sudo reboot` and verify the installation with `nvcc --version`.
