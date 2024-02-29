@@ -13,8 +13,7 @@ You can install drivers through the Additional Drivers application in the Ubuntu
 
 Another option is to install drivers by executing the following commands in the terminal.
 ```bash
-sudo apt-get install -y nvidia-kernel-open-545
-sudo apt-get install -y cuda-drivers-545
+sudo apt install nvidia-driver-545
 ```
 
 Once drivers are installed you will need to reboot the system.
