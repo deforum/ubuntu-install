@@ -9,11 +9,10 @@ bash install_drivers.sh
 
 ## 1. GPU Drivers
 
-We recommend using drivers from NVIDIA over the Additional Drivers App. You can download the drivers directly from NVIDIA using the link below:
-
-[Drivers Link](https://www.nvidia.com/download/driverResults.aspx/211711/en-us/)
-
-After downloading the driver, reboot your system using the command:
+```bash
+sudo apt-get install -y nvidia-kernel-open-545
+sudo apt-get install -y cuda-drivers-545
+```
 
 ```bash
 sudo reboot
@@ -23,6 +22,10 @@ Verify the GPU driver installation using:
 
 ```bash
 nvidia-smi
+```
+
+You should see something that looks like this:
+```bash
 ```
 
 ## 2. Cuda Toolkit 12-3 deb (local)
