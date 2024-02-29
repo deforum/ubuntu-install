@@ -9,23 +9,47 @@ bash install_drivers.sh
 
 ## 1. GPU Drivers
 
+You can install drivers through the Additional Drivers application in the Ubuntu menu.
+
+Another option is to install drivers by executing the following commands in the terminal.
 ```bash
 sudo apt-get install -y nvidia-kernel-open-545
 sudo apt-get install -y cuda-drivers-545
 ```
 
+Once drivers are installed you will need to reboot the system.
 ```bash
 sudo reboot
 ```
 
-Verify the GPU driver installation using:
-
+After you can verify the installation with the following commands:
 ```bash
 nvidia-smi
 ```
 
 You should see something that looks like this:
 ```bash
+Thu Feb 29 07:07:23 2024       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA RTX A6000               On  | 00000000:0A:00.0  On |                  Off |
+| 30%   30C    P8              26W / 300W |    441MiB / 49140MiB |      4%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|    0   N/A  N/A      1950      G   /usr/lib/xorg/Xorg                          212MiB |
+|    0   N/A  N/A      2083      G   /usr/bin/gnome-shell                        146MiB |
++---------------------------------------------------------------------------------------+
 ```
 
 ## 2. Cuda Toolkit 12-3 deb (local)
