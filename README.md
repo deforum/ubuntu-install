@@ -2,11 +2,6 @@
 
 Follow this guide to setup a system with GPU drivers, CUDA toolkit, NVIDIA cuDNN, Miniconda, Docker and NVIDIA Container Toolkit.
 
-## 0. Install script added
-```bash
-bash install_drivers.sh
-```
-
 ## 1. GPU Drivers
 
 You can install drivers through the Additional Drivers application in the Ubuntu menu.
