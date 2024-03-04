@@ -1,7 +1,17 @@
 #!/bin/bash
 
 # Verify if GPU is CUDA-enabled
-lspci | grep -i nvidia
+# Run lspci | grep -i nvidia
+lspci_output=$(lspci | grep -i nvidia)
+
+# Check the return code of the previous command
+if [ $? -eq 1 ]; then
+    echo "No NVIDIA devices found."
+    exit 1
+fi
+
+echo "NVIDIA devices found:"
+echo "$lspci_output"
 
 # Remove previous NVIDIA driver installation
 sudo apt-get -y purge nvidia*
