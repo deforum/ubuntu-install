@@ -78,7 +78,14 @@ export PATH=/usr/local/cuda-12.3/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 ```
 
-Reboot the system using `sudo reboot` and verify the installation with `nvcc --version`.
+Reboot the system:
+```bash
+sudo reboot
+```
+and verify the installation with 
+```bash
+nvcc --version
+```
 
 ## 3. NVIDIA cuDNN
 
