@@ -4,37 +4,37 @@
 lspci | grep -i nvidia
 
 # Remove previous NVIDIA driver installation
-sudo apt-get purge nvidia* -y
-sudo apt remove nvidia-* -y
-sudo rm /etc/apt/sources.list.d/cuda* -y
-sudo apt-get autoremove && sudo apt-get autoclean -y
-sudo rm -rf /usr/local/cuda* -y
+sudo apt-get -y purge nvidia*
+sudo apt -y remove nvidia-*
+sudo rm /etc/apt/sources.list.d/cuda*
+sudo apt-get autoremove -y && sudo apt-get -y autoclean
+sudo rm -rf /usr/local/cuda*
 
 # System update
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
 # Install essential packages
-sudo apt-get install g++ freeglut3-dev build-essential libx11-dev -y
-sudo apt-get install libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev -y
+sudo apt-get install -y g++ freeglut3-dev build-essential libx11-dev
+sudo apt-get install -y libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev
 
 # Add PPA repository for NVIDIA drivers
-sudo add-apt-repository ppa:graphics-drivers/ppa -y
-sudo apt update -y
-
-# Install NVIDIA driver and dependencies
-sudo apt-get install -y cuda-drivers
+sudo add-apt-repository -y ppa:graphics-drivers/ppa
+sudo apt-get update -y
 
 # Download and set up CUDA repository
-wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
-sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
-wget https://developer.download.nvidia.com/compute/cuda/12.3.1/local_installers/cuda-repo-ubuntu2204-12-3-local_12.3.1-545.23.08-1_amd64.deb
-sudo dpkg -i cuda-repo-ubuntu2204-12-3-local_12.3.1-545.23.08-1_amd64.deb
-sudo cp /var/cuda-repo-ubuntu2204-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
 sudo apt-get update -y
 
 # Install CUDA Toolkit 12.3
-sudo apt-get -y install cuda-toolkit-12-3
+sudo apt-get install -y cuda-toolkit-12-3
+
+# Install NVIDIA driver and dependencies
+sudo apt-get install -y nvidia-kernel-open-545
+
+# Install CUDA Driver
+sudo apt-get install -y cuda-drivers-545
 
 # Set up paths for CUDA
 echo 'export PATH=/usr/local/cuda-12.3/bin:$PATH' >> ~/.bashrc
@@ -42,18 +42,18 @@ echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64:$LD_LIBRARY_PATH' >> ~/.
 source ~/.bashrc
 sudo ldconfig
 
-# Install cuDNN v11.3
-wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/cudnn-11.3-linux-x64-v8.2.1.32.tgz
-tar -xzvf "cudnn-11.3-linux-x64-v8.2.1.32.tgz"
-
-# Copy cuDNN files to CUDA toolkit directory
-sudo cp -P cuda/include/cudnn.h /usr/local/cuda-12.3/include 
-sudo cp -P cuda/lib64/libcudnn* /usr/local/cuda-12.3/lib64/
-sudo chmod a+r /usr/local/cuda-12.3/lib64/libcudnn*
+# Install cuDNN v12.3
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt-get update -y
+sudo apt-get install -y cudnn-cuda-12
 
 # Install nvtop for monitoring
-sudo apt install nvtop -y
+sudo apt-get install -y nvtop
 
 # Verify the installation
 nvidia-smi
 nvcc -V
+
+# Clean up downloaded files
+rm ./cuda-keyring_1.1-1_all.de*
