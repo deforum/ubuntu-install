@@ -169,6 +169,7 @@ Also, perform the post-install steps as indicated in the link below:
 ```bash
 sudo groupadd docker
 sudo usermod -aG docker $USER
+newgrp docker
 ```
 
 Then log out or reboot. Verify the installation by running:
