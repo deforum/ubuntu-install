@@ -67,3 +67,21 @@ nvcc -V
 
 # Clean up downloaded files
 rm ./cuda-keyring_1.1-1_all.de*
+
+# Install Mambaforge https://github.com/conda-forge/miniforge
+# mkdir $HOME/apps
+wget "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+bash Mambaforge-$(uname)-$(uname -m).sh -b -p $HOME/mambaforge
+
+# Set up paths for Mamba
+echo 'export PATH=$HOME/mambaforge/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
+# Add conda initalise block to .bashrc
+mamba init
+
+# Don't activate base env in terminal sessions
+conda config --set auto_activate_base false
+
+# Clean mambaforge install script
+rm ./Mambaforge-Linux-x86_64.sh
